@@ -1,31 +1,33 @@
 package org.alias.studyconnect.model;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import javax.persistence.Cacheable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedEntityGraphs;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @XmlRootElement	
 //@Cacheable
 //@Cache(usage = CacheConcurrencyStrategy.READ_ONLY )
+@NamedEntityGraph(name = "graph.User.subjects", attributeNodes = @NamedAttributeNode("subjectList"))
 public class UserDetails {
 	
 	@Id
@@ -36,7 +38,7 @@ public class UserDetails {
 	private String email;
 	@Column(nullable = false)
 	private String password;
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER , cascade = CascadeType.ALL)
 	@JoinColumn(name = "SUBJECT_ID")
 	private Set<Subject> subjectList = new HashSet<>();
 	@ManyToMany(mappedBy = "user")
@@ -97,6 +99,7 @@ public class UserDetails {
 //	}
 	
 //	SubjectList
+
 	public Set<Subject> getSubjectList() {
 		return subjectList;
 	}

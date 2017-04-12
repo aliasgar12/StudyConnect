@@ -17,7 +17,11 @@ import org.alias.studyconnect.model.Subject;
 import org.alias.studyconnect.model.UserDetails;
 import org.alias.studyconnect.services.LoginService;
 import org.alias.studyconnect.services.RegistrationService;
-import org.alias.studyconnect.services.UserService;;
+import org.alias.studyconnect.services.UserService;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;;
 
 @Path("user")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -26,6 +30,7 @@ import org.alias.studyconnect.services.UserService;;
 public class UserResource {
 	
 	private UserService us;
+	private ObjectMapper objectMapper;
 	
 	
 	
@@ -62,12 +67,12 @@ public class UserResource {
 	//Login resource
 	@Path("/login")				
 	@POST
-	public Response login(UserDetails user){
+	public Response login(UserDetails user) throws JsonProcessingException{
 			LoginService loginService = new LoginService();
-			Set<Subject> subjectList = loginService.login(user.getUserId(), user.getPassword());
-			if(subjectList != null){
+			String result = loginService.login(user.getUserId(), user.getPassword());
+			if(result != null){
 				return Response.status(Status.OK)
-					.entity(user)
+					.entity(result)
 					.build();
 			}else{
 				return Response.status(Status.NOT_FOUND)

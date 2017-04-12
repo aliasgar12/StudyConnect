@@ -30,12 +30,14 @@ public class Subject implements Serializable{
 	@Id
 	private int subjectCRN;
 	private String subjectName;
-	@OneToMany(mappedBy = "subjectId", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "subjectId", fetch = FetchType.LAZY)
+	@JsonIgnore
 	private Set<Module> modules = new HashSet<>();
-	@ManyToMany(mappedBy = "subjectList", fetch = FetchType.EAGER)
+	@ManyToMany(mappedBy = "subjectList", fetch = FetchType.LAZY)
 	@JsonIgnore // avoid infinite recursion
 	private Set<UserDetails> studentList = new HashSet<>();
-	@OneToMany(mappedBy = "subject", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "subject", fetch = FetchType.LAZY)
+	@JsonIgnore
 	private Set<Request> requestList = new HashSet<>();
 	@ManyToOne
 	@JoinColumn(name = "DEPARTMENT_ID")
