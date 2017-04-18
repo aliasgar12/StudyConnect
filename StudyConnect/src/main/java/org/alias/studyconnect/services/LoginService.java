@@ -1,14 +1,10 @@
 package org.alias.studyconnect.services;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
-
 import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
 
-import org.alias.studyconnect.model.Subject;
 import org.alias.studyconnect.model.UserDetails;
 
 import com.fasterxml.jackson.core.JsonProcessingException;

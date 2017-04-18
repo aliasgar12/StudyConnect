@@ -1,8 +1,6 @@
 package org.alias.studyconnect.resources;
 
 
-import java.util.Set;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -13,15 +11,13 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import org.alias.studyconnect.model.Subject;
 import org.alias.studyconnect.model.UserDetails;
 import org.alias.studyconnect.services.LoginService;
 import org.alias.studyconnect.services.RegistrationService;
 import org.alias.studyconnect.services.UserService;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;;
+import com.fasterxml.jackson.databind.ObjectMapper;;
 
 @Path("user")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -101,6 +97,11 @@ public class UserResource {
 	@Path("/college")
 	public CollegeResource fetchCollegeList(){
 		return new CollegeResource();
+	}
+	
+	@Path("/dept")
+	public DepartmentResource fetchDeptList(){
+		return new DepartmentResource();
 	}
 	
 }

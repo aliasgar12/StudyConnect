@@ -7,8 +7,6 @@ import javax.persistence.EntityManager;
 import org.alias.studyconnect.model.Module;
 import org.alias.studyconnect.model.Subject;
 import org.alias.studyconnect.model.UserDetails;
-import org.hibernate.action.internal.EntityIdentityInsertAction;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;

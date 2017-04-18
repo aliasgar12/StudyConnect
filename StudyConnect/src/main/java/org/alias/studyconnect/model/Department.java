@@ -3,7 +3,6 @@ package org.alias.studyconnect.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Generated;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -24,7 +23,6 @@ public class Department {
 	private String name;
 	@ManyToOne
 	@JoinColumn(name = "COLLEGE_ID")
-	@JsonIgnore
 	private College collegeId;
 	@OneToMany(mappedBy = "dept", fetch = FetchType.EAGER) 
 	@JsonIgnore

@@ -4,7 +4,6 @@ import java.util.Set;
 
 import javax.persistence.EntityManager;
 
-import org.alias.studyconnect.model.Module;
 import org.alias.studyconnect.model.Request;
 import org.alias.studyconnect.model.RequestId;
 import org.alias.studyconnect.model.Subject;
