@@ -1,5 +1,6 @@
 package org.alias.studyconnect.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,8 +15,12 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Module {
+public class Module implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int moduleId;
@@ -24,9 +29,12 @@ public class Module {
 	@ManyToOne
 	@JoinColumn(name = "SUBJECT_CRN")
 	private Subject subjectId; // subjectID
-	@JsonIgnore
 	@ManyToMany
 	Set<UserDetails> user = new HashSet<>();
+	
+	public Module(){
+		
+	}
 	
 	
 	public Subject getSubjectId() {

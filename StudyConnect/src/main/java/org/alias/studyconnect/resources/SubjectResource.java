@@ -59,7 +59,7 @@ public class SubjectResource {
 		objectMapper = new ObjectMapper();
 		objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 		String leftSubs = objectMapper.writeValueAsString(leftSubjects);
-		return Response.ok(leftSubs).build();
+		return Response.ok().build();
 	}
 
 //	Module resources

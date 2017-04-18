@@ -38,14 +38,17 @@ public class UserDetails {
 	private String email;
 	@Column(nullable = false)
 	private String password;
-	@ManyToMany(fetch = FetchType.EAGER , cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER )
 	@JoinColumn(name = "SUBJECT_ID")
 	private Set<Subject> subjectList = new HashSet<>();
 	@ManyToMany(mappedBy = "user")
+	@JsonIgnore
 	private Set<Module> moduleCompleted = new HashSet<>();
 	@OneToMany(mappedBy ="userSent")
+	@JsonIgnore
 	Set<Request> reqSent = new HashSet<>();
 	@OneToMany(mappedBy = "userReceived")
+	@JsonIgnore
 	Set<Request> reqReceived = new HashSet<>();
 	//@Embedded
 	//private ChatDetails chatDetails = new ChatDetails();

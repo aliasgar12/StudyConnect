@@ -1,6 +1,7 @@
 package org.alias.studyconnect.resources;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import org.alias.studyconnect.model.College;
@@ -22,6 +23,18 @@ public class HibernateTest {
 		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
+		
+//		UserDetails users = new UserDetails();
+//		users = session.get(UserDetails.class, 4986985);
+//		Set<Subject> subjects = users.getSubjectList();
+//		System.out.println(subjects.toString());
+		
+//		Subject subject = new Subject();
+//		subject = session.get(Subject.class, 2);
+//		Set<UserDetails> users = subject.getStudentList();
+//		for(UserDetails user: users)
+//			System.out.println(user.getUserName());
+		
 		
 //		Add colleges
 		
@@ -108,56 +121,56 @@ public class HibernateTest {
 		
 		//adding modules to a subject
 
-//		session.flush();
-//		session.clear();
-//		Subject subject = session.get(Subject.class, 3);
-//		Module module = new Module();
-//		module.setModuleName("Java OOP Review");
-//		module.setSubjectId(subject);
-//		session.save(module);
-//		module = new Module();
-//		module.setModuleName("Generics");
-//		module.setSubjectId(subject);
-//		session.save(module);
-//		module = new Module();
-//		module.setModuleName("Collections");
-//		module.setSubjectId(subject);
-//		session.save(module);
-//		module = new Module();
-//		module.setModuleName("MetaProgrammin");
-//		module.setSubjectId(subject);
-//		session.save(module);
-//		module = new Module();
-//		module.setModuleName("Using Lambda Expression");
-//		module.setSubjectId(subject);
-//		session.save(module);
-//		module = new Module();
-//		module.setModuleName("Designing with Lambdas");
-//		module.setSubjectId(subject);
-//		session.save(module);
-//		module = new Module();
-//		module.setModuleName("Concurrent Programming");
-//		module.setSubjectId(subject);
-//		session.save(module);
+		session.flush();
+		session.clear();
+		Subject subject = session.get(Subject.class, 2);
+		Module module = new Module();
+		module.setModuleName("Development Framework");
+		module.setSubjectId(subject);
+		session.save(module);
+		module = new Module();
+		module.setModuleName("C# Programming");
+		module.setSubjectId(subject);
+		session.save(module);
+		module = new Module();
+		module.setModuleName("Network Protocols");
+		module.setSubjectId(subject);
+		session.save(module);
+		module = new Module();
+		module.setModuleName("Basic Network Programming");
+		module.setSubjectId(subject);
+		session.save(module);
+		module = new Module();
+		module.setModuleName("Network Programming Development");
+		module.setSubjectId(subject);
+		session.save(module);
+		module = new Module();
+		module.setModuleName("Distributed Systems");
+		module.setSubjectId(subject);
+		session.save(module);
+		module = new Module();
+		module.setModuleName("Fully Distributed Mutually Exclusive Protocols");
+		module.setSubjectId(subject);
+		session.save(module);
 		
 		//Adding request
 		
-		Request request = new Request();
-		UserDetails toUser = session.get(UserDetails.class, 45259783);
-		UserDetails fromUser = session.get(UserDetails.class, 4986985);
-		Subject subject = session.get(Subject.class, 6);
-		request.setFlag(0);
-		request.setSubject(subject);
-		request.setUserSent(fromUser);
-		request.setUserReceived(toUser);
-		request.setToUserName(toUser.getUserName());
-		request.setFromUserName(fromUser.getUserName());
-		RequestId reqId = new RequestId();
-		reqId.setToUserId(toUser.getUserId());
-		reqId.setFromUserId(fromUser.getUserId());
-		reqId.setSubjectCRN(subject.getSubjectCRN());
-		request.setRequestId(reqId);
-		session.save(request);
+//		Request request = new Request();
+//		UserDetails toUser = session.get(UserDetails.class, 45259783);
+//		UserDetails fromUser = session.get(UserDetails.class, 4986985);
+//		Subject subject = session.get(Subject.class, 6);
+//		request.setFlag(0);
+//		request.setSubject(subject);
+//		request.setUserSent(fromUser);
+//		request.setUserReceived(toUser);
+//		request.setToUserName(toUser.getUserName());
+//		request.setFromUserName(fromUser.getUserName());
+//		RequestId reqId = new RequestId();
+//		reqId.setToUserId(toUser.getUserId());
+//		reqId.setFromUserId(fromUser.getUserId());
+//		reqId.setSubjectCRN(subject.getSubjectCRN());
+//		request.setRequestId(reqId);
+//		session.save(request);
 		session.getTransaction().commit();
 		session.close();
 	}

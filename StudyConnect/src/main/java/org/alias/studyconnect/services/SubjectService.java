@@ -26,6 +26,9 @@ public class SubjectService {
 		em.getTransaction().commit();
 		em.close();
 		return mySubjects;
+		
+		// what jackson does in above situation is that it starts to eagerly fetch all the child from the
+		// every subject in the subject list if the json ignore annotation is not mentioned.
 	}
 
 

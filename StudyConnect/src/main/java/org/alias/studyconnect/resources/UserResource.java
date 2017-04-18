@@ -98,4 +98,9 @@ public class UserResource {
 		return new RequestResource();
 	}
 	
+	@Path("/college")
+	public CollegeResource fetchCollegeList(){
+		return new CollegeResource();
+	}
+	
 }

@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Department {	
 	
@@ -22,8 +24,10 @@ public class Department {
 	private String name;
 	@ManyToOne
 	@JoinColumn(name = "COLLEGE_ID")
+	@JsonIgnore
 	private College collegeId;
 	@OneToMany(mappedBy = "dept", fetch = FetchType.EAGER) 
+	@JsonIgnore
 	private List<Subject> subjectList = new ArrayList<>();
 	
 	public Department(){}
