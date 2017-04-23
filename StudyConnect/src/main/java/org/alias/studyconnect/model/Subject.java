@@ -36,9 +36,6 @@ public class Subject implements Serializable{
 	@ManyToMany(mappedBy = "subjectList", fetch = FetchType.LAZY)
 	@JsonIgnore // avoid infinite recursion
 	private Set<UserDetails> studentList = new HashSet<>();
-	@OneToMany(mappedBy = "subject", fetch = FetchType.LAZY)
-	@JsonIgnore
-	private Set<Request> requestList = new HashSet<>();
 	@ManyToOne
 	@JoinColumn(name = "DEPARTMENT_ID")
 	@JsonIgnore
@@ -88,13 +85,6 @@ public class Subject implements Serializable{
 		this.studentList = studentList;
 	}
 	
-	//RequestList
-	public Set<Request> getRequestList() {
-		return requestList;
-	}
-	public void setRequestList(Set<Request> requestList) {
-		this.requestList = requestList;
-	}
 	
 	//Department
 	public Department getDept() {

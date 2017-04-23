@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.persistence.EntityManager;
 
+import org.alias.studyconnect.model.Module;
 import org.alias.studyconnect.model.Request;
 import org.alias.studyconnect.model.RequestId;
 import org.alias.studyconnect.model.Subject;
@@ -59,10 +60,13 @@ public class RequestService {
 	private void doOperations(Request request){
 		UserDetails toUser = em.find(UserDetails.class, request.getRequestId().getToUserId());
 		UserDetails fromUser = em.find(UserDetails.class, request.getRequestId().getFromUserId());
-		Subject subject = em.find(Subject.class, request.getRequestId().getSubjectCRN());
+		Module module = em.find(Module.class, request.getRequestId().getModuleId());
 		request.setUserSent(fromUser);
 		request.setUserReceived(toUser);
-		request.setSubject(subject);
+		request.setModule(module);
+		toUser.getReqReceived().add(request);
+		fromUser.getReqReceived().add(request);
+		module.getRequestList().add(request);
 	}
 
 
@@ -83,10 +87,10 @@ public class RequestService {
 	private void doDelOperations(Request request) {
 		UserDetails toUser = em.find(UserDetails.class, request.getRequestId().getToUserId());
 		UserDetails fromUser = em.find(UserDetails.class, request.getRequestId().getFromUserId());
-		Subject subject = em.find(Subject.class, request.getRequestId().getSubjectCRN());
+		Module module = em.find(Module.class, request.getRequestId().getModuleId());
 		toUser.getReqReceived().remove(request);
 		fromUser.getReqSent().remove(request);
-		subject.getRequestList().remove(request);
+		module.getRequestList().remove(request);
 		
 	}
 

@@ -14,9 +14,9 @@ public class Request {
 	@EmbeddedId
 	private RequestId requestId;
 	@ManyToOne
-	@JoinColumn(name = "SUBJECT_ID")
+	@JoinColumn(name = "MODULE_ID")
 	@JsonIgnore
-	private Subject subject;
+	private Module module;
 	@ManyToOne
 	@JsonIgnore
 	private UserDetails userSent;
@@ -48,14 +48,13 @@ public class Request {
 
 	//Getters and Setters
 
-	public Subject getSubject() {
-		return subject;
+	public Module getModule() {
+		return module;
 	}
 
-	public void setSubject(Subject subject) {
-		this.subject = subject;
+	public void setModule(Module module) {
+		this.module = module;
 	}
-
 	public RequestId getRequestId() {
 		return requestId;
 	}
