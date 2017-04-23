@@ -37,6 +37,8 @@ public class SubjectService {
 		em.getTransaction().begin();
 		UserDetails user = em.find(UserDetails.class, id);
 		user.getSubjectList().add(subject);
+		Subject sub = em.find(Subject.class, subject.getSubjectCRN());
+		sub.getStudentList().add(user);
 		em.getTransaction().commit();
 		em.close();
 	}
@@ -48,6 +50,7 @@ public class SubjectService {
 		UserDetails user = em.find(UserDetails.class, id);
 		Subject sub = em.find(Subject.class, subject.getSubjectCRN());
 		user.getSubjectList().remove(sub);
+		sub.getStudentList().remove(user);
 		em.getTransaction().commit();
 		em.close();
 		return user.getSubjectList(); 

@@ -32,10 +32,24 @@ public class HibernateTest {
 //		Subject subject = new Subject();
 //		subject = session.get(Subject.class, 2);
 //		Set<UserDetails> users = subject.getStudentList();
-//		for(UserDetails user: users)
+//		for(UserDetails user: users){
 //			System.out.println(user.getUserName());
+//			System.out.println(user.getUserId());
+//		}
 		
 		
+		
+		
+		
+//		Add User
+		
+//		UserDetails user = new UserDetails ();
+//		user.setUserName("Ali Asgar");
+//		user.setUserId(4986985);
+//		user.setEmail("aliasgar@mail.usf.edu");
+//		user.setPassword("workhardpartyharder");
+//		user.setApp_token("f-yVNbe00_s:APA91bEVjdK0Tk4vy54NEbL8GZ96A5YoFIhktT4vg_PKpo4ck-1L701WCzYWgCHp5ZglDDNbQm7b-3z3JuU20yWRPrgh2axVc-7KkygJaa0bXew5QBf58BL0PL35vzyVTPEEIopJ0-Ly");
+//		session.save(user);
 //		Add colleges
 		
 //		College college = new College();
@@ -55,7 +69,7 @@ public class HibernateTest {
 //		collegeList.add("Nursing");
 //		collegeList.add("Public Health");
 //		collegeList.add("Undergraduate Studies");
-//		session.beginTransaction();
+//
 //		
 //		for(String collegename : collegeList){
 //			college.setCollegeName(collegename);	
@@ -67,16 +81,18 @@ public class HibernateTest {
 		//Add department to a particualar college
 //		Department dept = new Department();
 //		Set<String> deptList = new HashSet<>();
-//		deptList.add("Accounting");
-//		deptList.add("Business Administration");
-//		deptList.add("Finance");
-//		deptList.add("Information System and Decision Sciences");
-//		deptList.add("Management");
-//		deptList.add("Marketing");
-		
-			
+//		deptList.add("Chemical Engineering");
+//		deptList.add("Interdisciplinary Engineering");
+//		deptList.add("Electrical Engineering");
+//		deptList.add("Mechanical Engineering");
+//		deptList.add("Industrial and Management Systems");
+//		deptList.add("Civil and Environmental Engineering");
+//		deptList.add("Computer Science & Engineering");
+//		deptList.add("Information Technology");
+//		
+//			
 //		for(String deptName : deptList){
-//			dept.setCollegeId(session.get(College.class,15));
+//			dept.setCollegeId(session.get(College.class,8));
 //			dept.setName(deptName);
 //			session.save(dept);
 //			session.flush();
@@ -84,74 +100,140 @@ public class HibernateTest {
 //		}
 		
 		
-		// adding subjects
-//		session.flush();
-//		session.clear();
-//		Subject sub1 = new Subject();
-//		sub1.setSubjectCRN(6);
-//		sub1.setSubjectName("Investment Banking");
-//		sub1.setCollege(session.get(College.class, 15));
-//		sub1.setDept(session.get(Department.class,24));
-//		session.save(sub1);
-//		sub1 = new Subject();
-//		sub1.setSubjectCRN(2);
-//		sub1.setSubjectName("Networking Programming");
-//		sub1.setCollege(session.get(College.class, 8));
-//		sub1.setDept(session.get(Department.class,17));
-//		session.save(sub1);
-//		sub1 = new Subject();
-//		sub1.setSubjectCRN(3);
-//		sub1.setSubjectName("Advanced OOP");
-//		sub1.setCollege(session.get(College.class, 8));
-//		sub1.setDept(session.get(Department.class,17));
-//		session.save(sub1);
-//		sub1 = new Subject();
-//		sub1.setSubjectCRN(4);
-//		sub1.setSubjectName("Graduate Practicum");
-//		sub1.setCollege(session.get(College.class, 8));
-//		sub1.setDept(session.get(Department.class,17));
-//		session.save(sub1);
-//		sub1 = new Subject();
-//		sub1.setSubjectCRN(5);
-//		sub1.setSubjectName("Software Testing");
-//		sub1.setCollege(session.get(College.class, 8));
-//		sub1.setDept(session.get(Department.class,17));
-//		session.save(sub1);
+//		 adding subjects
+		session.flush();
+		session.clear();
+		Subject sub1 = new Subject();
+		sub1.setSubjectCRN(6);
+		sub1.setSubjectName("Personal Finance");
+		sub1.setCollege(session.get(College.class, 15));
+		sub1.setDept(session.get(Department.class, 17));
+		session.save(sub1);
+		sub1 = new Subject();
+		sub1.setSubjectCRN(7);
+		sub1.setSubjectName("Fundmntls of Business Finance");
+		sub1.setCollege(session.get(College.class, 15));
+		sub1.setDept(session.get(Department.class,17));
+		session.save(sub1);
+		sub1 = new Subject();
+		sub1.setSubjectCRN(8);
+		sub1.setSubjectName("Principles of Finance");
+		sub1.setCollege(session.get(College.class, 15));
+		sub1.setDept(session.get(Department.class,17));
+		session.save(sub1);
+		sub1 = new Subject();
+		sub1.setSubjectCRN(9);
+		sub1.setSubjectName("International Finance");
+		sub1.setCollege(session.get(College.class, 15));
+		sub1.setDept(session.get(Department.class,17));    
+		session.save(sub1);
+		sub1 = new Subject();
+		sub1.setSubjectCRN(10);
+		sub1.setSubjectName("Working Capital Management");
+		sub1.setCollege(session.get(College.class, 15));
+		sub1.setDept(session.get(Department.class,17));
+		session.save(sub1);
+		sub1 = new Subject();
+		sub1.setSubjectCRN(11);
+		sub1.setSubjectName("Advanced Corporation Finance");
+		sub1.setCollege(session.get(College.class, 15));
+		sub1.setDept(session.get(Department.class,17));
+		session.save(sub1);
+		sub1 = new Subject();
+		sub1.setSubjectCRN(12);
+		sub1.setSubjectName("Financial Policies/Strategies");
+		sub1.setCollege(session.get(College.class, 15));
+		sub1.setDept(session.get(Department.class,17));
+		session.save(sub1);
+		sub1 = new Subject();
+		sub1.setSubjectCRN(13);
+		sub1.setSubjectName("Financial Statement Analysis");
+		sub1.setCollege(session.get(College.class, 15));
+		sub1.setDept(session.get(Department.class,17));
+		session.save(sub1);
+		sub1 = new Subject();
+		sub1.setSubjectCRN(14);
+		sub1.setSubjectName("Principles of Investments");
+		sub1.setCollege(session.get(College.class, 15));
+		sub1.setDept(session.get(Department.class,17));
+		session.save(sub1);
+		sub1 = new Subject();
+		sub1.setSubjectCRN(15);
+		sub1.setSubjectName("Applied Securities Analysis");
+		sub1.setCollege(session.get(College.class, 15));
+		sub1.setDept(session.get(Department.class,17));
+		session.save(sub1);
+		sub1 = new Subject();
+		sub1.setSubjectCRN(16);
+		sub1.setSubjectName("Independent Study");
+		sub1.setCollege(session.get(College.class, 15));
+		sub1.setDept(session.get(Department.class,17));
+		session.save(sub1);
+		sub1 = new Subject();
+		sub1.setSubjectCRN(17);
+		sub1.setSubjectName("Financial Modeling");
+		sub1.setCollege(session.get(College.class, 15));
+		sub1.setDept(session.get(Department.class,17));
+		session.save(sub1);
+		sub1 = new Subject();
+		sub1.setSubjectCRN(18);
+		sub1.setSubjectName("Finance Internship");
+		sub1.setCollege(session.get(College.class, 15));
+		sub1.setDept(session.get(Department.class,17));
+		session.save(sub1);
+		sub1 = new Subject();
+		sub1.setSubjectCRN(19);
+		sub1.setSubjectName("Financial Management");
+		sub1.setCollege(session.get(College.class, 15));
+		sub1.setDept(session.get(Department.class,17));
+		session.save(sub1);
+		sub1 = new Subject();
+		sub1.setSubjectCRN(20);
+		sub1.setSubjectName("Adv Financial Management");
+		sub1.setCollege(session.get(College.class, 15));
+		sub1.setDept(session.get(Department.class,17));
+		session.save(sub1);
+		sub1 = new Subject();
+		sub1.setSubjectCRN(21);
+		sub1.setSubjectName("Financial Policy");
+		sub1.setCollege(session.get(College.class, 15));
+		sub1.setDept(session.get(Department.class,17));
+		session.save(sub1);
 		
 		
 		//adding modules to a subject
 
-		session.flush();
-		session.clear();
-		Subject subject = session.get(Subject.class, 2);
-		Module module = new Module();
-		module.setModuleName("Development Framework");
-		module.setSubjectId(subject);
-		session.save(module);
-		module = new Module();
-		module.setModuleName("C# Programming");
-		module.setSubjectId(subject);
-		session.save(module);
-		module = new Module();
-		module.setModuleName("Network Protocols");
-		module.setSubjectId(subject);
-		session.save(module);
-		module = new Module();
-		module.setModuleName("Basic Network Programming");
-		module.setSubjectId(subject);
-		session.save(module);
-		module = new Module();
-		module.setModuleName("Network Programming Development");
-		module.setSubjectId(subject);
-		session.save(module);
-		module = new Module();
-		module.setModuleName("Distributed Systems");
-		module.setSubjectId(subject);
-		session.save(module);
-		module = new Module();
-		module.setModuleName("Fully Distributed Mutually Exclusive Protocols");
-		module.setSubjectId(subject);
-		session.save(module);
+//		session.flush();
+//		session.clear();
+//		Subject subject = session.get(Subject.class, 2);
+//		Module module = new Module();
+//		module.setModuleName("Development Framework");
+//		module.setSubjectId(subject);
+//		session.save(module);
+//		module = new Module();
+//		module.setModuleName("C# Programming");
+//		module.setSubjectId(subject);
+//		session.save(module);
+//		module = new Module();
+//		module.setModuleName("Network Protocols");
+//		module.setSubjectId(subject);
+//		session.save(module);
+//		module = new Module();
+//		module.setModuleName("Basic Network Programming");
+//		module.setSubjectId(subject);
+//		session.save(module);
+//		module = new Module();
+//		module.setModuleName("Network Programming Development");
+//		module.setSubjectId(subject);
+//		session.save(module);
+//		module = new Module();
+//		module.setModuleName("Distributed Systems");
+//		module.setSubjectId(subject);
+//		session.save(module);
+//		module = new Module();
+//		module.setModuleName("Fully Distributed Mutually Exclusive Protocols");
+//		module.setSubjectId(subject);
+//		session.save(module);
 		
 		//Adding request
 		
@@ -176,3 +258,80 @@ public class HibernateTest {
 	}
 
 }
+
+
+
+
+
+
+
+
+
+// List of Dept
+
+//Accounting
+//Business Administration
+//Finance
+//Information System and Decision Sciences
+//Management
+//Marketing
+
+//ECH	- Chemical Engineering
+//EGB	- Interdisciplinary Engineering
+//EGE	- Electrical Engineering
+//EGR	- Mechanical Engineering
+//EGS	- Industrial and Management Systems
+//EGX	- Civil and Environmental Engineering
+
+
+//		Personal Finance
+//		Fundmntls of Business Finance
+//		Principles of Finance
+//		International Finance
+//		Working Capital Management
+//		Advanced Corporation Finance
+//		Financial Policies/Strategies
+//		Financial Statement Analysis
+//		Principles of Investments
+//		Applied Securities Analysis
+//		Independent Study
+//		Financial Modeling
+//		Finance Internship
+//		Financial Management
+//		Adv Financial Management
+//		Financial Policy
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

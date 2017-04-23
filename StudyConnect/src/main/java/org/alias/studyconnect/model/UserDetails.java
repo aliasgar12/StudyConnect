@@ -38,6 +38,8 @@ public class UserDetails {
 	private String email;
 	@Column(nullable = false)
 	private String password;
+	@Column(name = "APP_TOKENID")
+	private String app_token;
 	@ManyToMany(fetch = FetchType.EAGER )
 	@JoinColumn(name = "SUBJECT_ID")
 	private Set<Subject> subjectList = new HashSet<>();
@@ -132,6 +134,14 @@ public class UserDetails {
 
 	public void setModuleCompleted(Set<Module> moduleCompleted) {
 		this.moduleCompleted = moduleCompleted;
+	}
+	
+	public String getApp_token() {
+		return app_token;
+	}
+
+	public void setApp_token(String app_token) {
+		this.app_token = app_token;
 	}
 	
 	
