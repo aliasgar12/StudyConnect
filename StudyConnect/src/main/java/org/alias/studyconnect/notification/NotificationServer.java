@@ -5,35 +5,41 @@ import com.google.android.gcm.server.Notification;
 import com.google.android.gcm.server.Result;
 import com.google.android.gcm.server.Sender;
 
-public class SendRequestNotification {
+public class NotificationServer {
+
 	private static String fromUser;
 	private static String moduleName;
+	private static int request_type;
 	private static String subjectName;
     final String serverKey = "AAAAogNSrr0:APA91bEsGN-sqcB58YdJklZR56Y8HcsV5bD-Bqc1qDHSyN7Pzf9u7_vwutExkZTSDffwNLPC5IwrI6CAM7LPJFTWmpIkwvPMMGnbJeMftgus96lpIW1FOIln5XniWSpDh4cbBqUAQY_z";
     private static String app_token;
-    private static SendRequestNotification mInstance;
+    private static NotificationServer mInstance;
+    private static String body;
     
-    private SendRequestNotification(String fromUser, String moduleName,String subjectName,String app_token){
-    	SendRequestNotification.fromUser = fromUser;
-    	SendRequestNotification.moduleName = moduleName;
-    	SendRequestNotification.subjectName = subjectName;
-    	SendRequestNotification.app_token = app_token;
+    private NotificationServer(String fromUser, String moduleName,String subjectName,String app_token, int request_type){
+    	NotificationServer.fromUser = fromUser;
+    	NotificationServer.moduleName = moduleName;
+    	NotificationServer.subjectName = subjectName;
+    	NotificationServer.app_token = app_token;
+    	NotificationServer.request_type = request_type;
     }
     
-    public static synchronized SendRequestNotification getInstance(String fromUser, String moduleName,String subjectName,String app_token){
-    	if(mInstance == null)
-    		mInstance = new SendRequestNotification(fromUser, moduleName, subjectName, app_token);
+    public static synchronized NotificationServer getInstance(String fromUser, String moduleName,String subjectName,String app_token, int request_type){
+    		mInstance = new NotificationServer(fromUser, moduleName, subjectName, app_token, request_type);
     	return mInstance;
     }
     
-    public void sendAddRequest(){
+    public void sendRequest(){
+		
+    	if(request_type==0)
+			body = fromUser + " requested you to help with the " + moduleName + " in " +subjectName;
+		else
+			body = "Request to " + fromUser + " for subject " + subjectName + " with " + moduleName + " has been accepted";
     	
-    	
-    	Thread t = new Thread() {
+		Thread t = new Thread() {
 	        public void run(){ 
 	            try {
 	                Sender sender = new FCMSender(serverKey);
-	                String body = fromUser + " requested you to help with the " + moduleName + " in " +subjectName;
 	                Notification mNotification = new Notification.Builder("MyNotification")
 							.title(fromUser)
 							.body(body)
@@ -47,6 +53,7 @@ public class SendRequestNotification {
 	                                  .addData("fromUser", fromUser)
 	                                  .addData("moduleName", moduleName)
 	                                  .addData("subjectName", subjectName)
+	                                  .addData("request_type", String.valueOf(request_type))
 	                                  .notification(mNotification)
 	                                  .build(); 
 		          
@@ -66,5 +73,4 @@ public class SendRequestNotification {
 	            iex.printStackTrace();
 	        }
     }
-    
 }
