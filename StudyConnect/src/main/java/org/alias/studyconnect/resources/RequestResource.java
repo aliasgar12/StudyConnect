@@ -56,6 +56,8 @@ public class RequestResource {
 	public Response addRequest (Request request){
 		requestService = new RequestService();
 		int result = requestService.addRequest(request);
+		if(result != 1)
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		return Response.status(Status.OK)
 						.build();
 	}

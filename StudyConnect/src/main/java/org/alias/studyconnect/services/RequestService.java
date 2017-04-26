@@ -3,16 +3,22 @@ package org.alias.studyconnect.services;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
+import javax.persistence.RollbackException;
 
 import org.alias.studyconnect.model.Module;
 import org.alias.studyconnect.model.Request;
 import org.alias.studyconnect.model.RequestId;
 import org.alias.studyconnect.model.Subject;
 import org.alias.studyconnect.model.UserDetails;
+import org.alias.studyconnect.notification.SendRequestNotification;
+import org.hibernate.TypeMismatchException;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+
+import antlr.MismatchedTokenException;
+import javassist.NotFoundException;
 
 public class RequestService {
 	
@@ -48,16 +54,27 @@ public class RequestService {
 
 
 	public int addRequest(Request request) {
-		em = EntityUtil.getEntityManager();
+		try{
+			em = EntityUtil.getEntityManager();
 		em.getTransaction().begin();
 		doOperations(request);
 		em.persist(request);
 		em.getTransaction().commit();
 		em.close();	
+		}catch( RollbackException e){
+			e.printStackTrace();
+			return 0;
+		}catch(NotFoundException e){
+			e.printStackTrace();
+			return 0;
+		}catch (IllegalArgumentException e){
+			e.printStackTrace();
+			return 0;
+		}
 		return 1;
 	}
 	
-	private void doOperations(Request request){
+	private void doOperations(Request request) throws NotFoundException, TypeMismatchException, IllegalArgumentException{
 		UserDetails toUser = em.find(UserDetails.class, request.getRequestId().getToUserId());
 		UserDetails fromUser = em.find(UserDetails.class, request.getRequestId().getFromUserId());
 		Module module = em.find(Module.class, request.getRequestId().getModuleId());
@@ -67,6 +84,11 @@ public class RequestService {
 		toUser.getReqReceived().add(request);
 		fromUser.getReqReceived().add(request);
 		module.getRequestList().add(request);
+		SendRequestNotification.getInstance(fromUser.getUserName(),
+											module.getModuleName(),
+											module.getSubjectId().getSubjectName(),
+											toUser.getApp_token()).sendAddRequest();
+		
 	}
 
 
