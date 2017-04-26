@@ -56,8 +56,10 @@ public class RequestResource {
 	public Response addRequest (Request request){
 		requestService = new RequestService();
 		int result = requestService.addRequest(request);
-		if(result != 1)
+		if(result == 0)
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		else if(result == 409)
+			return Response.status(Status.CONFLICT).build();
 		return Response.status(Status.OK)
 						.build();
 	}
@@ -71,9 +73,12 @@ public class RequestResource {
 	public Response deleteRequest (Request request){
 		requestService = new RequestService();
 		int result = requestService.deleteRequest(request);
-		return Response.status(Status.OK)
+		if(result == 1)
+			return Response.status(Status.OK)
 						.build();
-	}
+			return Response.status(Status.INTERNAL_SERVER_ERROR)
+						.build();
+			}
 	
 	
 //	Set the corresponding request flag to 1."

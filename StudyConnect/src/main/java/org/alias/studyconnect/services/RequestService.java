@@ -2,6 +2,7 @@ package org.alias.studyconnect.services;
 
 import java.util.Set;
 
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.RollbackException;
 
@@ -58,7 +59,6 @@ public class RequestService {
 			em = EntityUtil.getEntityManager();
 		em.getTransaction().begin();
 		doOperations(request);
-		em.persist(request);
 		em.getTransaction().commit();
 		em.close();	
 		}catch( RollbackException e){
@@ -70,6 +70,9 @@ public class RequestService {
 		}catch (IllegalArgumentException e){
 			e.printStackTrace();
 			return 0;
+		}catch (EntityExistsException e){
+			e.printStackTrace();
+			return 409;
 		}
 		return 1;
 	}
@@ -84,6 +87,7 @@ public class RequestService {
 		toUser.getReqReceived().add(request);
 		fromUser.getReqReceived().add(request);
 		module.getRequestList().add(request);
+		em.persist(request);
 		SendRequestNotification.getInstance(fromUser.getUserName(),
 											module.getModuleName(),
 											module.getSubjectId().getSubjectName(),
@@ -93,20 +97,24 @@ public class RequestService {
 
 
 	public int deleteRequest(Request request) {
-		em = EntityUtil.getEntityManager();
+		try{
+			em = EntityUtil.getEntityManager();
 		em.getTransaction().begin();
 		RequestId reqid = request.getRequestId();
 		Request req = em.find(Request.class, reqid);
-		//doDelOperations(request);
+//		doDelOperations(request);
 		req = em.merge(req);
 		em.remove(req);
 		em.getTransaction().commit();
 		em.close();	
+		}catch (RollbackException e){
+			return 0;
+		}
 		return 1;
 	}
 
 
-	private void doDelOperations(Request request) {
+	private void doDelOperations(Request request) throws NotFoundException, TypeMismatchException, IllegalArgumentException{
 		UserDetails toUser = em.find(UserDetails.class, request.getRequestId().getToUserId());
 		UserDetails fromUser = em.find(UserDetails.class, request.getRequestId().getFromUserId());
 		Module module = em.find(Module.class, request.getRequestId().getModuleId());
