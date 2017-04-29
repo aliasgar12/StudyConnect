@@ -24,10 +24,10 @@ public class HibernateTest {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		
-//		UserDetails users = new UserDetails();
-//		users = session.get(UserDetails.class, 4986985);
+		UserDetails users = new UserDetails();
+		users = session.get(UserDetails.class, 4590583);
 //		Set<Subject> subjects = users.getSubjectList();
-//		System.out.println(subjects.toString());
+		System.out.println(users.getUserName());
 		
 //		Subject subject = new Subject();
 //		subject = session.get(Subject.class, 2);
@@ -203,37 +203,37 @@ public class HibernateTest {
 		
 		//adding modules to a subject
 
-		session.flush();
-		session.clear();
-		Subject subject = session.get(Subject.class, 2);
-		Module module = new Module();
-		module.setModuleName("Development Framework");
-		module.setSubjectId(subject);
-		session.save(module);
-		module = new Module();
-		module.setModuleName("C# Programming");
-		module.setSubjectId(subject);
-		session.save(module);
-		module = new Module();
-		module.setModuleName("Network Protocols");
-		module.setSubjectId(subject);
-		session.save(module);
-		module = new Module();
-		module.setModuleName("Basic Network Programming");
-		module.setSubjectId(subject);
-		session.save(module);
-		module = new Module();
-		module.setModuleName("Network Programming Development");
-		module.setSubjectId(subject);
-		session.save(module);
-		module = new Module();
-		module.setModuleName("Distributed Systems");
-		module.setSubjectId(subject);
-		session.save(module);
-		module = new Module();
-		module.setModuleName("Fully Distributed Mutually Exclusive Protocols");
-		module.setSubjectId(subject);
-		session.save(module);
+//		session.flush();
+//		session.clear();
+//		Subject subject = session.get(Subject.class, 2);
+//		Module module = new Module();
+//		module.setModuleName("Development Framework");
+//		module.setSubjectId(subject);
+//		session.save(module);
+//		module = new Module();
+//		module.setModuleName("C# Programming");
+//		module.setSubjectId(subject);
+//		session.save(module);
+//		module = new Module();
+//		module.setModuleName("Network Protocols");
+//		module.setSubjectId(subject);
+//		session.save(module);
+//		module = new Module();
+//		module.setModuleName("Basic Network Programming");
+//		module.setSubjectId(subject);
+//		session.save(module);
+//		module = new Module();
+//		module.setModuleName("Network Programming Development");
+//		module.setSubjectId(subject);
+//		session.save(module);
+//		module = new Module();
+//		module.setModuleName("Distributed Systems");
+//		module.setSubjectId(subject);
+//		session.save(module);
+//		module = new Module();
+//		module.setModuleName("Fully Distributed Mutually Exclusive Protocols");
+//		module.setSubjectId(subject);
+//		session.save(module);
 		
 		//Adding request
 		

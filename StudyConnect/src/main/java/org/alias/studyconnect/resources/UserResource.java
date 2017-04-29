@@ -104,4 +104,8 @@ public class UserResource {
 		return new DepartmentResource();
 	}
 	
+	@Path("/token")
+	public TokenResource handleToken(){
+		return new TokenResource();
+	}
 }
