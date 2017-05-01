@@ -3,6 +3,7 @@ package org.alias.studyconnect.resources;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -60,15 +61,16 @@ public class ModuleResource {
 	//A student completes a module
 //	Add to the completed module list in the user details
 //	Add the student to the list completed student to the particular module
-	@POST
+	@PUT
 	@Path("module/")
 	public Response moduleCompleted(@PathParam("userId") int userId , Module module){
 		moduleService = new ModuleService();
-		int result = moduleService.moduleCompleted(userId, module);
-		if(result == 0)
-			return Response.status(Status.NOT_FOUND).build();
-		return Response.status(Status.OK)
-						.build();
+		String result = moduleService.moduleCompleted(userId, module);
+		if(!result.equals(""))
+			return Response.ok(result)
+					.build();	
+		return Response.status(Status.NOT_FOUND).build();
+		
 	}
 	
 	

@@ -12,16 +12,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 public class ModuleService {
-	
+
 	private ObjectMapper objectMapper;
 	private EntityManager em;
-	
-	public String moduleBySubject(int id) throws JsonProcessingException{
+
+	public String moduleBySubject(int id) throws JsonProcessingException {
 		em = EntityUtil.getEntityManager();
 		em.getTransaction().begin();
-		Subject subject = em.find(Subject.class, id); // will throw exception if subject not found
+		Subject subject = em.find(Subject.class, id); // will throw exception if
+														// subject not found
 		Set<Module> modules = subject.getModules();
-		objectMapper= new ObjectMapper();
+		objectMapper = new ObjectMapper();
 		objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 		String result = objectMapper.writeValueAsString(modules);
 		em.getTransaction().commit();
@@ -42,29 +43,39 @@ public class ModuleService {
 		return result;
 	}
 
-	public int moduleCompleted(int userId, Module mod) {
-		int result;
+	public String moduleCompleted(int userId, Module mod) {
+		String result ="";
 		em = EntityUtil.getEntityManager();
 		em.getTransaction().begin();
 		Module module = em.find(Module.class, mod.getModuleId());
 		UserDetails user = em.find(UserDetails.class, userId);
-		try{
-			module.getUser().add(user);
-			user.getModuleCompleted().add(module);
-			result = 1;
-		}catch(NullPointerException e){
+		try {
+			// check if the module is already completed 
+			if (!module.getUser().contains(user))
+				result = markCompleted(module, user);
+			else
+				result = markIncomplete(module, user);
+		} catch (NullPointerException e) {
 			e.printStackTrace();
-			result =  0;
+			return result;
 		}
 		em.getTransaction().commit();
 		em.close();
-		
+
 		return result;
 	}
-	
-	
-	
-	
-	
-	
+
+	private String markIncomplete(Module module, UserDetails user) throws NullPointerException {
+		module.getUser().remove(user);
+		user.getModuleCompleted().remove(module);
+		return "incomplete";
+	}
+
+	private String markCompleted(Module module, UserDetails user) throws NullPointerException {
+		module.getUser().add(user);
+		user.getModuleCompleted().add(module);
+		return "complete";
+
+	}
+
 }
